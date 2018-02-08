@@ -48,29 +48,25 @@ case class AppFsm() extends Actor with Logging {
   context.system.scheduler.schedule(1 seconds, 1 seconds, self, Ping)
 
   override def receive: Receive = {
-    case Gui.Start => {
+    case Gui.Start =>
       logger.info("Received Gui.Start")
       showInDialog("App")
-    }
-    case Gui.Stop => {
+    case Gui.Stop =>
       logger.info("Received Gui.Stop")
       Platform.exit()
       context.system.terminate()
-    }
-    case Ping => {
+    case Ping =>
       logger.info("Received Ping")
       self ! Pong
-    }
-    case Pong => {
+    case Pong =>
       logger.info("Received Pong")
-    }
   }
 
   private def showInDialog(message: String) {
     val callable = new concurrent.Callable[Unit] {
       override def call(): Unit = new Stage {
         outer =>
-        title = "Stand-Alone Dialog - runAndWait"
+        title = "App Dialog"
         scene = new Scene {
           root = new BorderPane {
             padding = Insets(25)
