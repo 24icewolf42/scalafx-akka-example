@@ -6,11 +6,11 @@
     <version>0.1</version>
     <name>${project.artifactId}</name>
     <description>My wonderfull scala app</description>
-    <inceptionYear>2015</inceptionYear>
+    <inceptionYear>2018</inceptionYear>
     <licenses>
         <license>
-            <name>My License</name>
-            <url>http://....</url>
+            <name>bsd-2-clause</name>
+            <url>https://github.com/24icewolf42/scalafx-akka-example/blob/master/LICENSE</url>
             <distribution>repo</distribution>
         </license>
     </licenses>
