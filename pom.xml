@@ -20,8 +20,8 @@
         <maven.compiler.source>1.9</maven.compiler.source>
         <maven.compiler.target>1.9</maven.compiler.target>
         <encoding>UTF-8</encoding>
-        <scala.version>2.11.12</scala.version>
-        <scala.compat.version>2.11</scala.compat.version>
+        <scala.version>2.12.6</scala.version>
+        <scala.compat.version>2.12</scala.compat.version>
     </properties>
 
     <dependencies>
@@ -33,20 +33,20 @@
         <!-- https://mvnrepository.com/artifact/com.outr/scribe -->
         <dependency>
             <groupId>com.outr</groupId>
-            <artifactId>scribe_2.11</artifactId>
-            <version>2.0.0</version>
+            <artifactId>scribe_${scala.compat.version}</artifactId>
+            <version>2.4.0</version>
         </dependency>
         <!-- https://mvnrepository.com/artifact/org.scalafx/scalafx -->
         <dependency>
             <groupId>org.scalafx</groupId>
-            <artifactId>scalafx_2.11</artifactId>
+            <artifactId>scalafx_${scala.compat.version}</artifactId>
             <version>8.0.144-R12</version>
         </dependency>
         <!-- https://mvnrepository.com/artifact/com.typesafe.akka/akka-actor -->
         <dependency>
             <groupId>com.typesafe.akka</groupId>
-            <artifactId>akka-actor_2.11</artifactId>
-            <version>2.5.9</version>
+            <artifactId>akka-actor_${scala.compat.version}</artifactId>
+            <version>2.5.12</version>
         </dependency>
 
         <!-- https://mvnrepository.com/artifact/org.scalatest/scalatest -->
@@ -66,7 +66,7 @@
                 <!-- https://mvnrepository.com/artifact/net.alchim31.maven/scala-maven-plugin -->
                 <groupId>net.alchim31.maven</groupId>
                 <artifactId>scala-maven-plugin</artifactId>
-                <version>3.3.1</version>
+                <version>3.3.2</version>
                 <executions>
                     <execution>
                         <goals>
@@ -75,11 +75,21 @@
                         </goals>
                     </execution>
                 </executions>
+                <configuration>
+                    <args>
+                        <arg>-opt:l:inline</arg>
+                        <arg>-opt-inline-from</arg>
+                        <arg>-g:vars</arg>
+                        <arg>-target:jvm-1.8</arg>
+                        <arg>-Xcheckinit</arg>
+                    </args>
+                </configuration>
             </plugin>
             <plugin>
+                <!-- https://mvnrepository.com/artifact/org.apache.maven.plugins/maven-shade-plugin -->
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-shade-plugin</artifactId>
-                <version>3.1.0</version>
+                <version>3.1.1</version>
                 <executions>
                     <execution>
                         <phase>package</phase>
