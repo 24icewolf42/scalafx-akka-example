@@ -39,13 +39,18 @@ case object App extends Logging {
     Platform.implicitExit = false
     logger.info(s"Starting $productPrefix")
     new JFXPanel()
-    ActorSystem("App").actorOf(Props[AppFsm], "fsm") ! Gui.Start
+    ActorSystem("App").actorOf(Props[AppFsm], "fsm")
   }
 }
 
 case class AppFsm() extends Actor with Logging {
 
   context.system.scheduler.schedule(1 seconds, 1 seconds, self, Ping)
+
+  override def preStart(): Unit = {
+    super.preStart()
+    self ! Gui.Start
+  }
 
   override def receive: Receive = {
     case Gui.Start =>
